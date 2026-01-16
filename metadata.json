@@ -1,0 +1,7 @@
+{
+  "name": "MemoraEvents - Your Event Memories",
+  "description": "A premium platform for event attendees to access their personalized event photos and customize them with thoughts and reflections.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
