@@ -5,7 +5,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
-import { MyPhoto } from './pages/MyPhoto';
+import MyPhoto  from './pages/MyPhoto';
 
 const App: React.FC = () => {
   return (
