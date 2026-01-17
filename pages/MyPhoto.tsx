@@ -481,83 +481,91 @@ const captureRef = useRef<HTMLDivElement>(null);
 }
 
 
+
+
+
 /* ================= EXTRA SMALL MOBILE (PHONES) ================= */
+
+/* ================= PHONE VIEW – FINAL FIX ================= */
 @media (max-width: 480px) {
 
   /* ---------- CLOUDS ---------- */
   .cloud {
-    width: 135px;
-    height: 44px;
-    top: 7%;
+    width: 28%;
+    min-width: 100px;
+    height: 40px;
+    top: 6%;
   }
 
+  .cloud.left { left: 3%; }
+  .cloud.right { right: 3%; }
+
   .cloud::before {
-    width: 40px;
-    height: 40px;
-    top: -18px;
-    left: 14px;
+    width: 30px;
+    height: 30px;
+    top: -14px;
+    left: 10px;
   }
 
   .cloud::after {
-    width: 48px;
-    height: 48px;
-    top: -26px;
-    right: 16px;
+    width: 36px;
+    height: 36px;
+    top: -20px;
+    right: 12px;
   }
 
   .cloud span {
-    width: 34px;
-    height: 34px;
-    top: -14px;
+    width: 26px;
+    height: 26px;
+    top: -12px;
   }
 
   .cloud p {
-    font-size: 10px;
-    max-width: 80%;
+    font-size: 9px;
+    max-width: 90%;
+    line-height: 1.1;
   }
 
   /* ---------- HEART ---------- */
   .heart {
-    width: 90px;
-    height: 82px;
-    top: 47%;
+    width: 70px;
+    height: 64px;
+    top: 46%;
+    left: 5%;
   }
 
   .heart::before,
   .heart::after {
-    width: 90px;
-    height: 82px;
+    width: 70px;
+    height: 64px;
   }
 
-  .heart::before {
-    top: -41px;
-  }
-
-  .heart::after {
-    left: 41px;
-  }
+  .heart::before { top: -32px; }
+  .heart::after { left: 32px; }
 
   .heart p {
-    font-size: 9px;
-    padding: 0 8px;
+    font-size: 8px;
+    padding: 0 6px;
   }
 
   /* ---------- CIRCLE ---------- */
   .circle {
-    width: 90px;
-    height: 90px;
-    top: 47%;
-    font-size: 10px;
+    width: 70px;
+    height: 70px;
+    top: 46%;
+    right: 5%;
+    font-size: 9px;
   }
 
   /* ---------- OVAL ---------- */
   .oval {
-    width: 88%;
-    padding: 10px 14px;
-    font-size: 10px;
-    bottom: 4%;
+    width: 90%;
+    padding: 8px 12px;
+    font-size: 9px;
+    bottom: 3%;
   }
 }
+
 
 
       `}</style>
