@@ -522,6 +522,7 @@ const captureRef = useRef<HTMLDivElement>(null);
 
   .cloud p {
     font-size: 6px;
+    front-family: "sans-serif";
     max-width: 90%;
     line-height: 1.1;
   }
