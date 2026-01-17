@@ -109,6 +109,9 @@ const captureRef = useRef<HTMLDivElement>(null);
 
       {/* PURE CORE CSS */}
       <style>{`
+
+      
+
         body {
           margin: 0;
           background: #f8fafc;
@@ -359,16 +362,203 @@ const captureRef = useRef<HTMLDivElement>(null);
           height: 80px;
         }
 
-        @media (max-width: 768px) {
+       /* ================= MOBILE RESPONSIVE PATCH ================= */
+@media (max-width: 768px) {
+
+  .page {
+    padding: 16px;
+  }
+
+  /* Keep landscape but slightly shorter */
+  .photo-frame {
+    aspect-ratio: 3 / 2;
+    border-radius: 18px;
+  }
+
+  /* ---------- CLOUDS ---------- */
   .cloud {
-    width: 190px;
-    height: 70px;
+    width: 170px;
+    height: 58px;
+    top: 8%;
+  }
+
+  .cloud.left {
+    left: 3%;
+  }
+
+  .cloud.right {
+    right: 3%;
+  }
+
+  .cloud::before {
+    width: 55px;
+    height: 55px;
+    top: -26px;
+    left: 18px;
+  }
+
+  .cloud::after {
+    width: 65px;
+    height: 65px;
+    top: -36px;
+    right: 20px;
+  }
+
+  .cloud span {
+    width: 45px;
+    height: 45px;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .cloud p {
+    font-size: 12px;
+    max-width: 75%;
+  }
+
+  /* ---------- HEART ---------- */
+  .heart {
+    width: 120px;
+    height: 110px;
+    top: 48%;
+    left: 6%;
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 120px;
+    height: 110px;
+  }
+
+  .heart::before {
+    top: -55px;
+  }
+
+  .heart::after {
+    left: 55px;
+  }
+
+  .heart p {
+    font-size: 11px;
+    padding: 0 10px;
+  }
+
+  /* ---------- CIRCLE ---------- */
+  .circle {
+    width: 120px;
+    height: 120px;
+    top: 48%;
+    right: 6%;
+    font-size: 12px;
+  }
+
+  /* ---------- OVAL ---------- */
+  .oval {
+    width: 82%;
+    bottom: 5%;
+    padding: 14px 18px;
+    font-size: 12px;
+    border-radius: 999px;
+  }
+
+  /* ---------- CONTROLS ---------- */
+  .controls {
+    margin-top: 20px;
+  }
+
+  .controls input,
+  .controls textarea {
     font-size: 13px;
   }
+
+  .download-btn {
+    margin-top: 16px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+  }
 }
+
+
+/* ================= EXTRA SMALL MOBILE (PHONES) ================= */
+@media (max-width: 480px) {
+
+  /* ---------- CLOUDS ---------- */
+  .cloud {
+    width: 135px;
+    height: 44px;
+    top: 7%;
+  }
+
+  .cloud::before {
+    width: 40px;
+    height: 40px;
+    top: -18px;
+    left: 14px;
+  }
+
+  .cloud::after {
+    width: 48px;
+    height: 48px;
+    top: -26px;
+    right: 16px;
+  }
+
+  .cloud span {
+    width: 34px;
+    height: 34px;
+    top: -14px;
+  }
+
+  .cloud p {
+    font-size: 10px;
+    max-width: 80%;
+  }
+
+  /* ---------- HEART ---------- */
+  .heart {
+    width: 90px;
+    height: 82px;
+    top: 47%;
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 90px;
+    height: 82px;
+  }
+
+  .heart::before {
+    top: -41px;
+  }
+
+  .heart::after {
+    left: 41px;
+  }
+
+  .heart p {
+    font-size: 9px;
+    padding: 0 8px;
+  }
+
+  /* ---------- CIRCLE ---------- */
+  .circle {
+    width: 90px;
+    height: 90px;
+    top: 47%;
+    font-size: 10px;
+  }
+
+  /* ---------- OVAL ---------- */
+  .oval {
+    width: 88%;
+    padding: 10px 14px;
+    font-size: 10px;
+    bottom: 4%;
+  }
+}
+
 
       `}</style>
     </div>
