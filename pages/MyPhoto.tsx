@@ -521,7 +521,7 @@ const captureRef = useRef<HTMLDivElement>(null);
   }
 
   .cloud p {
-    font-size: 9px;
+    font-size: 6px;
     max-width: 90%;
     line-height: 1.1;
   }
@@ -544,7 +544,7 @@ const captureRef = useRef<HTMLDivElement>(null);
   .heart::after { left: 32px; }
 
   .heart p {
-    font-size: 8px;
+    font-size: 6px;
     padding: 0 6px;
   }
 
@@ -554,14 +554,14 @@ const captureRef = useRef<HTMLDivElement>(null);
     height: 70px;
     top: 46%;
     right: 5%;
-    font-size: 9px;
+    font-size: 6px;
   }
 
   /* ---------- OVAL ---------- */
   .oval {
     width: 90%;
     padding: 8px 12px;
-    font-size: 9px;
+    font-size: 6px;
     bottom: 3%;
   }
 }
