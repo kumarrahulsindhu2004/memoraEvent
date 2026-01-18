@@ -470,138 +470,81 @@ export default function MyPhoto() {
   box-shadow: 0 12px 30px rgba(225,29,72,0.35);
 }
 
-
-/* ================= MOBILE RESPONSIVE ================= */
 @media (max-width: 768px) {
 
-  .page {
-    padding: 20px;
-  }
-
-  /* ---------- SEARCH ---------- */
-  .search-box input {
-    width: 200px;
-    font-size: 13px;
-  }
-
-  .search-box button {
-    padding: 10px 18px;
-    font-size: 13px;
-  }
-
-  /* ---------- PHOTO FRAME ---------- */
-  .photo-frame {
-    border-radius: 20px;
-  }
-
-  /* ---------- CLOUDS ---------- */
+  /* CLOUDS */
   .cloud {
-    width: 100px;
-    top: 1%;
+    width: 22%;
+    top: 0.9%;
   }
+
+  .cloud.left { left: 3%; }
+  .cloud.right { right: 3%; }
 
   .cloud p {
-    font-size: 6px;
-    inset: 22%;
+    font-size: 5px;
+    inset: 24%;
   }
 
-  /* ---------- HEART ---------- */
+  /* HEART */
   .heart {
-    width: 90px;
-    top: 52%;
-    left: 6%;
+    width: 25%;
+    top: 45%;
   }
 
   .heart p {
-    font-size: 9px;
+    font-size: 5px
   }
 
-  /* ---------- CIRCLE (oval.png) ---------- */
+  /* CIRCLE (oval.png) */
   .circle {
-    width: 90px;
+    width: 14%;
     right: 5%;
-    top: 52%;
+    top: 40%;
   }
 
   .circle p {
-    font-size: 9px;
-    inset: 20%;
-    line-height: 1.2;
+    font-size: 5px;
+    left:10%;
+    bottom:30%;
+    inset: 22%;
+    line-height: 1.1;
   }
 
-  /* ---------- BOTTOM OVAL ---------- */
+  /* BOTTOM OVAL */
   .oval {
-    width: 85%;
-    padding: 14px 18px;
+    width: 78%;
     bottom: 4%;
+    padding: 10px 14px;
   }
 
   .oval p {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  /* ---------- EDITOR PANEL ---------- */
-  .editor-panel {
-    padding: 20px;
-    margin-top: 28px;
-  }
-
-  .editor-panel h3 {
-    font-size: 16px;
-  }
-
-  .field label {
-    font-size: 12px;
-  }
-
-  .input-wrap input,
-  .input-wrap textarea {
-    font-size: 13px;
-    padding: 12px 14px;
-  }
-
-  .input-wrap textarea {
-    height: 90px;
-  }
-
-  .input-wrap span {
-    font-size: 10px;
-  }
-
-  .download-btn {
-    font-size: 14px;
-    padding: 12px 0;
+    font-size:5px;
+    line-height: 1.25;
   }
 }
 
-
-@media (max-width: 480px) {
+@media (max-width: 420px) {
 
   .cloud {
-    width: 110px;
+    width: 30%;
   }
 
-  .cloud p {
-    font-size: 9px;
-  }
-
-  .heart {
-    width: 70px;
-  }
-
+  .heart,
   .circle {
-    width: 70px;
+    width: 20%;
   }
+
 
   .oval {
-    width: 92%;
+    width: 86%;
   }
 
   .oval p {
-    font-size: 9px;
+    font-size: 5px;
   }
 }
+
 
       `}</style>
     </div>
