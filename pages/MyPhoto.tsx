@@ -585,6 +585,541 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+
+// import React, { useState, useRef } from "react";
+// import html2canvas from "html2canvas";
+
+// export default function MyPhoto() {
+//   const [imageName, setImageName] = useState("IMG001");
+//   const captureRef = useRef(null);
+
+//   const [cloudLeft, setCloudLeft] = useState(
+//     "Thinking about ideas, growth, and new possibilities"
+//   );
+//   const [cloudRight, setCloudRight] = useState(
+//     "Dreaming big while learning, building, and improving"
+//   );
+//   const [bottomText, setBottomText] = useState(
+//     "Memories for life are built from small moments, shared smiles, big dreams, and experiences that stay with us forever and inspire the journey ahead"
+//   );
+
+//   /* ================= DOWNLOAD ================= */
+//   const handleDownload = async () => {
+//     if (!captureRef.current) return;
+
+//     // clone for export (prevents mobile layout issues)
+//     const clone = captureRef.current.cloneNode(true);
+//     clone.style.position = "fixed";
+//     clone.style.left = "-9999px";
+//     clone.style.top = "0";
+//     clone.style.width = "1200px";
+//     clone.style.height = "800px";
+//     document.body.appendChild(clone);
+
+//     if (document.fonts?.ready) await document.fonts.ready;
+//     await new Promise(r => setTimeout(r, 300));
+
+//     const canvas = await html2canvas(clone, {
+//       useCORS: true,
+//       scale: 2,
+//       backgroundColor: "#ffffff",
+//       windowWidth: 1200,
+//       windowHeight: 800,
+//     });
+
+//     document.body.removeChild(clone);
+
+//     const link = document.createElement("a");
+//     link.download = `${imageName}.png`;
+//     link.href = canvas.toDataURL("image/png", 1);
+//     link.click();
+//   };
+
+//   return (
+//     <div className="page">
+
+//       {/* SEARCH */}
+//       <div className="search-box">
+//         <input
+//           value={imageName}
+//           onChange={(e) => setImageName(e.target.value)}
+//           placeholder="Enter image name"
+//         />
+//         <button>GO</button>
+//       </div>
+
+//       {/* PREVIEW */}
+//       <div className="photo-frame" ref={captureRef}>
+//         <img
+//           src={`/Image/${imageName}.jpg`}
+//           alt=""
+//           onError={(e) => (e.currentTarget.src = "/Image/not-found.jpg")}
+//         />
+
+//         {/* LEFT CLOUD (IMAGE FLIPPED ONLY) */}
+//         <div className="cloud left flip-img">
+//           <img src="/cloud.png" alt="" />
+//           <p>{cloudLeft}</p>
+//         </div>
+
+//         {/* RIGHT CLOUD */}
+//         <div className="cloud right">
+//           <img src="/cloud.png" alt="" />
+//           <p>{cloudRight}</p>
+//         </div>
+
+//         {/* LEFT GPTW */}
+//         <div className="circle left">
+//           <img src="/oval.png" alt="" />
+//           <p>#GPTW</p>
+//         </div>
+
+//         {/* RIGHT HEART */}
+//         <div className="heart right">
+//           <img src="/heart.png" alt="" />
+//           <p>#ForAllSummit</p>
+//         </div>
+
+//         {/* BOTTOM TEXT */}
+//         <div className="oval">
+//           <p>{bottomText}</p>
+//         </div>
+//       </div>
+
+//       {/* EDITOR */}
+//       <div className="editor-panel">
+//         <h3>Text Editor</h3>
+
+//         <div className="field">
+//           <label>Left Cloud</label>
+//           <div className="input-wrap">
+//             <input maxLength={50} value={cloudLeft} onChange={e => setCloudLeft(e.target.value)} />
+//             <span>{cloudLeft.length}/50</span>
+//           </div>
+//         </div>
+
+//         <div className="field">
+//           <label>Right Cloud</label>
+//           <div className="input-wrap">
+//             <input maxLength={50} value={cloudRight} onChange={e => setCloudRight(e.target.value)} />
+//             <span>{cloudRight.length}/50</span>
+//           </div>
+//         </div>
+
+//         <div className="field">
+//           <label>Bottom Text</label>
+//           <div className="input-wrap">
+//             <textarea maxLength={150} value={bottomText} onChange={e => setBottomText(e.target.value)} />
+//             <span>{bottomText.length}/150</span>
+//           </div>
+//         </div>
+
+//         <button className="download-btn" onClick={handleDownload}>
+//           ⬇ Download Image
+//         </button>
+//       </div>
+
+//       {/* ================= CSS ================= */}
+//       <style>{`
+//         * { box-sizing: border-box; }
+
+//         body {
+//           margin: 0;
+//           font-family: system-ui, sans-serif;
+//           background: #f8fafc;
+//         }
+
+//         .page {
+//           max-width: 1100px;
+//           margin: auto;
+//           padding: 16px;
+//         }
+
+//         /* SEARCH */
+//         .search-box {
+//           display: flex;
+//           gap: 10px;
+//           justify-content: center;
+//           margin-bottom: 16px;
+//         }
+
+//         .search-box input {
+//           padding: 12px 16px;
+//           border-radius: 999px;
+//           border: 1px solid #e5e7eb;
+//           flex: 1;
+//           max-width: 260px;
+//         }
+
+//         .search-box button {
+//           padding: 12px 24px;
+//           border-radius: 999px;
+//           border: none;
+//           background: #e11d48;
+//           color: white;
+//           font-weight: 700;
+//         }
+
+//         /* PHOTO */
+//         .photo-frame {
+//           position: relative;
+//           width: 100%;
+//           aspect-ratio: 3 / 2;
+//           overflow: hidden;
+//           border-radius: 24px;
+//           background: white;
+//           box-shadow: 0 30px 60px rgba(0,0,0,.25);
+//         }
+
+//         .photo-frame img {
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//         }
+
+//         /* COMMON TEXT CENTER */
+//         .cloud p,
+//         .circle p,
+//         .heart p,
+//         .oval p {
+//           position: absolute;
+//           inset: 16%;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           text-align: center;
+//           padding: 10px;
+//           line-height: 1.35;
+//           word-break: break-word;
+//           margin: 0;
+//         }
+
+//         /* CLOUDS */
+//         .cloud {
+//           position: absolute;
+//           top: 4%;
+//           width: 220px;
+//         }
+
+//         .cloud p{
+//           top:10%;
+//         }
+//         .cloud img { width: 100%; }
+
+//         .cloud.left { left: 3%; }
+//         .cloud.right { right: 3%; }
+
+//         /* 🔥 flip IMAGE ONLY */
+//         .flip-img img { transform: scaleX(-1); }
+//         .flip-img p { transform: none; }
+
+//         /* GPTW */
+//         .circle.left {
+//           position: absolute;
+//           left: 4%;
+//           bottom: 30%;
+//           width: 140px;
+//         }
+
+//         .circle p{
+//           top:5%;
+//           left:5%;
+//       }
+//         .circle img { width: 100%; }
+
+//         /* HEART */
+//         .heart.right {
+//           position: absolute;
+//           right: 4%;
+//           bottom: 30%;
+//           width: 200px;
+//         }
+//           .heart P{
+//             top:-5%;
+//           }
+
+//         .heart img { width: 100%; }
+
+//         /* BOTTOM */
+//         .oval {
+//           position: absolute;
+//           bottom: 4%;
+//           left: 50%;
+//           transform: translateX(-50%);
+//           width: 85%;
+//           background: white;
+//           padding: 18px 26px;
+//           border-radius: 999px;
+//           box-shadow: 0 20px 40px rgba(0,0,0,.25);
+//         }
+
+//         .oval p {
+//           position: static;
+//           font-size: 15px;
+          
+//         }
+
+//         /* EDITOR */
+//         .editor-panel {
+//           margin-top: 24px;
+//           background: white;
+//           padding: 20px;
+//           border-radius: 18px;
+//           box-shadow: 0 10px 30px rgba(0,0,0,.08);
+//         }
+
+//         .field { margin-bottom: 14px; }
+
+//         .input-wrap {
+//           position: relative;
+//         }
+
+//         .input-wrap input,
+//         .input-wrap textarea {
+//           width: 100%;
+//           padding: 12px 14px;
+//           border-radius: 12px;
+//           border: 1.5px solid #e5e7eb;
+//         }
+
+//         .input-wrap span {
+//           position: absolute;
+//           right: 10px;
+//           bottom: 8px;
+//           font-size: 11px;
+//           color: #94a3b8;
+//         }
+
+//         .download-btn {
+//           width: 100%;
+//           margin-top: 16px;
+//           padding: 14px;
+//           border-radius: 999px;
+//           border: none;
+//           background: linear-gradient(135deg, #e11d48, #fb7185);
+//           color: white;
+//           font-weight: 700;
+//         }
+
+
+//         /* ================= MOBILE RESPONSIVE ================= */
+// @media (max-width: 768px) {
+
+//   /* PHOTO FRAME */
+//   .photo-frame {
+//     border-radius: 16px;
+//   }
+
+//   /* CLOUDS */
+//   .cloud {
+//     width: 130px;
+//     top: 3%;
+//   }
+
+//   .cloud.left { left: 2%; }
+//   .cloud.right { right: 2%; }
+
+//   .cloud p {
+//     inset: 18%;
+//     font-size: 10px;
+//     line-height: 1.2;
+//   }
+
+//   /* GPTW */
+//   .circle.left {
+//     width: 90px;
+//     left: 3%;
+//     bottom: 28%;
+//   }
+
+//   .circle p {
+//     inset: 20%;
+//     font-size: 9px;
+//     line-height: 1.2;
+//   }
+
+//   /* HEART */
+//   .heart.right {
+//     width: 70px;
+//     right: 3%;
+//     bottom: 28%;
+//   }
+
+//   .heart p {
+//     inset: 18%;
+//     font-size: 9px;
+//     line-height: 1.2;
+//   }
+
+//   /* BOTTOM OVAL */
+//   .oval {
+//     width: 92%;
+//     padding: 12px 16px;
+//     bottom: 3%;
+//   }
+
+//   .oval p {
+//     font-size: 11px;
+//     line-height: 1.35;
+//     text-align: center;
+//   }
+// }
+
+// /* ================= SMALL PHONES ================= */
+// @media (max-width: 420px) {
+
+//   .cloud {
+//     width: 110px;
+//   }
+
+//   .cloud p {
+//     font-size: 9px;
+//   }
+
+//   .circle.left {
+//     width: 75px;
+//   }
+
+//   .heart.right {
+//     width: 80px;
+//   }
+
+//   .circle p,
+//   .heart p {
+//     font-size: 8px;
+//   }
+
+//   .oval {
+//     width: 94%;
+//     padding: 10px 14px;
+//   }
+
+//   .oval p {
+//     font-size: 10px;
+//     line-height: 1.3;
+//   }
+// }
+
+// /* ================= MOBILE PREVIEW FIX (NO OVERLAP) ================= */
+// @media (max-width: 600px) {
+
+//   /* Clouds smaller + higher */
+//   .cloud {
+//     width: 90px;
+//     top: -2%;
+//   }
+
+//   .cloud.left { left: 2%; }
+//   .cloud.right { right: 2%; }
+
+//   .cloud p {
+//     inset: 10%;
+//     font-size: 6px;
+//     line-height: 1.15;
+//   }
+
+//   /* GPTW – move DOWN & shrink */
+//   .circle.left {
+//     width: 70px;
+//     left: 3%;
+//     bottom: 30%;
+//   }
+
+//   .circle p {
+//     inset: 10%;
+//     font-size: 5px;
+//   }
+
+//   /* HEART – move DOWN & shrink */
+//   .heart.right {
+//     width: 50px;
+//     right: 3%;
+//     bottom: 30%;
+//   }
+
+//   .heart p {
+//     inset: 10%;
+//     font-size: 5px;
+//   }
+
+//   /* Bottom oval pushed lower */
+//   .oval {
+//     width: 94%;
+//     bottom: 1.5%;
+//     padding: 0px 5px;
+//   }
+
+//   .oval p {
+//     font-size: 10px;
+//     line-height: 1.25;
+//     text-align: center;
+//   }
+// }
+
+
+// /* EXTRA SMALL PHONES */
+// @media (max-width: 380px) {
+
+//   .cloud {
+//     width: 95px;
+//   }
+
+//   .cloud p{
+//       font-size:7px;
+//   }
+
+//   .circle.left {
+//     width: 65px;
+//   }
+//     .circle p{
+//         font-size:6px;
+//     }
+
+//   .heart.right {
+//     width: 60px;
+//   }
+
+//     .heart P{
+//     inset: 1%;
+//     font-size: 5.5px;
+//     bottom :20%;
+//     }
+
+  
+
+//   .oval p {
+//     font-size: 9px;
+//   }
+// }
+
+
+        
+//       `}</style>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
 'use client';
 
 import React, { useState, useRef } from "react";
@@ -608,13 +1143,11 @@ export default function MyPhoto() {
   const handleDownload = async () => {
     if (!captureRef.current) return;
 
-    // clone for export (prevents mobile layout issues)
     const clone = captureRef.current.cloneNode(true);
     clone.style.position = "fixed";
     clone.style.left = "-9999px";
     clone.style.top = "0";
     clone.style.width = "1200px";
-    clone.style.height = "800px";
     document.body.appendChild(clone);
 
     if (document.fonts?.ready) await document.fonts.ready;
@@ -624,8 +1157,6 @@ export default function MyPhoto() {
       useCORS: true,
       scale: 2,
       backgroundColor: "#ffffff",
-      windowWidth: 1200,
-      windowHeight: 800,
     });
 
     document.body.removeChild(clone);
@@ -657,7 +1188,7 @@ export default function MyPhoto() {
           onError={(e) => (e.currentTarget.src = "/Image/not-found.jpg")}
         />
 
-        {/* LEFT CLOUD (IMAGE FLIPPED ONLY) */}
+        {/* LEFT CLOUD */}
         <div className="cloud left flip-img">
           <img src="/cloud.png" alt="" />
           <p>{cloudLeft}</p>
@@ -669,13 +1200,13 @@ export default function MyPhoto() {
           <p>{cloudRight}</p>
         </div>
 
-        {/* LEFT GPTW */}
+        {/* GPTW */}
         <div className="circle left">
           <img src="/oval.png" alt="" />
           <p>#GPTW</p>
         </div>
 
-        {/* RIGHT HEART */}
+        {/* HEART */}
         <div className="heart right">
           <img src="/heart.png" alt="" />
           <p>#ForAllSummit</p>
@@ -748,8 +1279,8 @@ export default function MyPhoto() {
           padding: 12px 16px;
           border-radius: 999px;
           border: 1px solid #e5e7eb;
-          flex: 1;
           max-width: 260px;
+          width: 100%;
         }
 
         .search-box button {
@@ -761,103 +1292,93 @@ export default function MyPhoto() {
           font-weight: 700;
         }
 
-        /* PHOTO */
+        /* PHOTO FRAME (DYNAMIC HEIGHT) */
         .photo-frame {
           position: relative;
           width: 100%;
-          aspect-ratio: 3 / 2;
           overflow: hidden;
           border-radius: 24px;
-          background: white;
+          background: #fff;
           box-shadow: 0 30px 60px rgba(0,0,0,.25);
         }
 
         .photo-frame img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
+          height: auto;              /* 🔥 KEY FIX */
+          display: block;
+          object-fit: contain;
         }
 
-        /* COMMON TEXT CENTER */
+        /* TEXT COMMON */
         .cloud p,
         .circle p,
-        .heart p,
-        .oval p {
+        .heart p {
           position: absolute;
           inset: 16%;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding: 10px;
-          line-height: 1.35;
-          word-break: break-word;
           margin: 0;
+          font-size: clamp(10px, 2.2vw, 14px);
+          line-height: 1.3;
         }
 
         /* CLOUDS */
         .cloud {
           position: absolute;
-          top: 4%;
-          width: 220px;
+          top: 6%;
+          width: 18%;
+          max-width: 220px;
         }
-
-        .cloud p{
-          top:10%;
-        }
-        .cloud img { width: 100%; }
 
         .cloud.left { left: 3%; }
         .cloud.right { right: 3%; }
+        .cloud img { width: 100%; }
 
-        /* 🔥 flip IMAGE ONLY */
         .flip-img img { transform: scaleX(-1); }
-        .flip-img p { transform: none; }
 
         /* GPTW */
         .circle.left {
           position: absolute;
           left: 4%;
-          bottom: 30%;
-          width: 140px;
+          top: 55%;
+          width: 12%;
+          max-width: 140px;
         }
-
-        .circle p{
-          top:5%;
-          left:5%;
-      }
-        .circle img { width: 100%; }
 
         /* HEART */
         .heart.right {
           position: absolute;
           right: 4%;
-          bottom: 30%;
-          width: 200px;
+          top: 55%;
+          width: 14%;
+          max-width: 200px;
         }
-          .heart P{
-            top:-5%;
-          }
 
-        .heart img { width: 100%; }
+        .circle img,
+        .heart img {
+          width: 100%;
+        }
 
-        /* BOTTOM */
+        /* BOTTOM TEXT */
         .oval {
           position: absolute;
-          bottom: 4%;
           left: 50%;
+          bottom: 4%;
           transform: translateX(-50%);
           width: 85%;
           background: white;
-          padding: 18px 26px;
+          padding: 16px 22px;
           border-radius: 999px;
           box-shadow: 0 20px 40px rgba(0,0,0,.25);
         }
 
         .oval p {
-          position: static;
-          font-size: 15px;
-          
+          margin: 0;
+          text-align: center;
+          font-size: clamp(12px, 2.6vw, 16px);
+          line-height: 1.4;
         }
 
         /* EDITOR */
@@ -901,200 +1422,6 @@ export default function MyPhoto() {
           color: white;
           font-weight: 700;
         }
-
-
-        /* ================= MOBILE RESPONSIVE ================= */
-@media (max-width: 768px) {
-
-  /* PHOTO FRAME */
-  .photo-frame {
-    border-radius: 16px;
-  }
-
-  /* CLOUDS */
-  .cloud {
-    width: 130px;
-    top: 3%;
-  }
-
-  .cloud.left { left: 2%; }
-  .cloud.right { right: 2%; }
-
-  .cloud p {
-    inset: 18%;
-    font-size: 10px;
-    line-height: 1.2;
-  }
-
-  /* GPTW */
-  .circle.left {
-    width: 90px;
-    left: 3%;
-    bottom: 28%;
-  }
-
-  .circle p {
-    inset: 20%;
-    font-size: 9px;
-    line-height: 1.2;
-  }
-
-  /* HEART */
-  .heart.right {
-    width: 70px;
-    right: 3%;
-    bottom: 28%;
-  }
-
-  .heart p {
-    inset: 18%;
-    font-size: 9px;
-    line-height: 1.2;
-  }
-
-  /* BOTTOM OVAL */
-  .oval {
-    width: 92%;
-    padding: 12px 16px;
-    bottom: 3%;
-  }
-
-  .oval p {
-    font-size: 11px;
-    line-height: 1.35;
-    text-align: center;
-  }
-}
-
-/* ================= SMALL PHONES ================= */
-@media (max-width: 420px) {
-
-  .cloud {
-    width: 110px;
-  }
-
-  .cloud p {
-    font-size: 9px;
-  }
-
-  .circle.left {
-    width: 75px;
-  }
-
-  .heart.right {
-    width: 80px;
-  }
-
-  .circle p,
-  .heart p {
-    font-size: 8px;
-  }
-
-  .oval {
-    width: 94%;
-    padding: 10px 14px;
-  }
-
-  .oval p {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-}
-
-/* ================= MOBILE PREVIEW FIX (NO OVERLAP) ================= */
-@media (max-width: 600px) {
-
-  /* Clouds smaller + higher */
-  .cloud {
-    width: 90px;
-    top: -2%;
-  }
-
-  .cloud.left { left: 2%; }
-  .cloud.right { right: 2%; }
-
-  .cloud p {
-    inset: 10%;
-    font-size: 6px;
-    line-height: 1.15;
-  }
-
-  /* GPTW – move DOWN & shrink */
-  .circle.left {
-    width: 70px;
-    left: 3%;
-    bottom: 30%;
-  }
-
-  .circle p {
-    inset: 10%;
-    font-size: 5px;
-  }
-
-  /* HEART – move DOWN & shrink */
-  .heart.right {
-    width: 50px;
-    right: 3%;
-    bottom: 30%;
-  }
-
-  .heart p {
-    inset: 10%;
-    font-size: 5px;
-  }
-
-  /* Bottom oval pushed lower */
-  .oval {
-    width: 94%;
-    bottom: 1.5%;
-    padding: 0px 5px;
-  }
-
-  .oval p {
-    font-size: 10px;
-    line-height: 1.25;
-    text-align: center;
-  }
-}
-
-
-/* EXTRA SMALL PHONES */
-@media (max-width: 380px) {
-
-  .cloud {
-    width: 95px;
-  }
-
-  .cloud p{
-      font-size:7px;
-  }
-
-  .circle.left {
-    width: 65px;
-  }
-    .circle p{
-        font-size:6px;
-    }
-
-  .heart.right {
-    width: 60px;
-  }
-    
-    .heart P{
-    inset: 1%;
-    font-size: 5.5px;
-    bottom :20%;
-    }
-
-  
-
-  .oval p {
-    font-size: 9px;
-  }
-}
-
-
-        
       `}</style>
     </div>
   );
