@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 export default function MyPhoto() {
   const [imageName, setImageName] = useState("IMG001");
-const captureRef = useRef<HTMLDivElement>(null);
+  const captureRef = useRef<HTMLDivElement>(null);
 
   const [cloudLeft, setCloudLeft] = useState("Thinking...");
   const [cloudRight, setCloudRight] = useState("Dreaming...");
@@ -13,41 +13,41 @@ const captureRef = useRef<HTMLDivElement>(null);
   );
 
   const handleDownload = async () => {
-  if (!captureRef.current) return;
+    if (!captureRef.current) return;
 
-  const canvas = await html2canvas(captureRef.current, {
-    useCORS: true,
-    scale: 2,
-    backgroundColor: null,
-  });
+    const canvas = await html2canvas(captureRef.current, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: null,
+    });
 
-  const link = document.createElement("a");
-  link.download = `${imageName}.png`;
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-};
+    const link = document.createElement("a");
+    link.download = `${imageName}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
 
 
   return (
     <div className="page">
       <div className="search-box">
-  <input
-    value={imageName}
-    onChange={(e) => setImageName(e.target.value)}
-    placeholder="Enter image name (e.g. IMG001)"
-  />
-  <button>GO</button>
-</div>
+        <input
+          value={imageName}
+          onChange={(e) => setImageName(e.target.value)}
+          placeholder="Enter image name (e.g. IMG001)"
+        />
+        <button>GO</button>
+      </div>
       {/* IMAGE PREVIEW */}
       <div className="photo-frame" ref={captureRef}>
 
         <img
-  src={`/Image/${imageName}.jpg`}
-  alt="Landscape"
-  onError={(e) => {
-    e.currentTarget.src = "/Image/not-found.jpg";
-  }}
-/>
+          src={`/Image/${imageName}.jpg`}
+          alt="Landscape"
+          onError={(e) => {
+            e.currentTarget.src = "/Image/not-found.jpg";
+          }}
+        />
 
 
 
@@ -55,62 +55,117 @@ const captureRef = useRef<HTMLDivElement>(null);
 
         {/* TOP CLOUDS */}
         <div className="cloud left">
-          <span></span>
+          {/* <span></span> */}
+
+          <img src="cloud.png" alt="Cloud left" />
           <p>{cloudLeft}</p>
         </div>
 
         <div className="cloud right">
-          <span></span>
+          {/* <span></span> */}
+          <img src="cloud.png" alt="Cloud right" />
           <p>{cloudRight}</p>
         </div>
 
         {/* MIDDLE SHAPES */}
         <div className="heart">
+          <img src="heart.png" alt="Heart" />
           <p>#ForAllSummit</p>
         </div>
 
         <div className="circle">
+          <img src="oval.png" alt="Circle" />
           <p>#GPTW</p>
-        </div>  
+        </div>
 
         {/* BOTTOM OVAL */}
         <div className="oval">
+          {/* <img src="oval.png" alt="Oval" /> */}
           <p>{bottomText}</p>
         </div>
       </div>
 
       {/* CONTROLS */}
-      <div className="controls">
-        <input
-          maxLength={30}
-          value={cloudLeft}
-          onChange={(e) => setCloudLeft(e.target.value)}
-          placeholder="Left Cloud (30 chars)"
-        />
 
-        <input
-          maxLength={30}
-          value={cloudRight}
-          onChange={(e) => setCloudRight(e.target.value)}
-          placeholder="Right Cloud (30 chars)"
-        />
 
-        <textarea
-          maxLength={80}
-          value={bottomText}
-          onChange={(e) => setBottomText(e.target.value)}
-          placeholder="Bottom text (80 chars)"
-        />
-      </div>
-      <button className="download-btn" onClick={handleDownload}>
-  Download Image
-</button>
+   <div className="editor-panel">
+
+  <h3>Text Editor</h3>
+
+  <div className="field">
+    <label>Left Cloud Text</label>
+    <div className="input-wrap">
+      <input
+        maxLength={30}
+        value={cloudLeft}
+        onChange={(e) => setCloudLeft(e.target.value)}
+        placeholder="Thinking..."
+      />
+      <span>{cloudLeft.length}/30</span>
+    </div>
+  </div>
+
+  <div className="field">
+    <label>Right Cloud Text</label>
+    <div className="input-wrap">
+      <input
+        maxLength={30}
+        value={cloudRight}
+        onChange={(e) => setCloudRight(e.target.value)}
+        placeholder="Dreaming..."
+      />
+      <span>{cloudRight.length}/30</span>
+    </div>
+  </div>
+
+  <div className="field">
+    <label>Bottom Oval Text</label>
+    <div className="input-wrap textarea">
+      <textarea
+        maxLength={80}
+        value={bottomText}
+        onChange={(e) => setBottomText(e.target.value)}
+        placeholder="Memories for Life... and beyond!"
+      />
+      <span>{bottomText.length}/80</span>
+    </div>
+  </div>
+
+  <button className="download-btn" onClick={handleDownload}>
+    ⬇ Download Image
+  </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
 
       {/* PURE CORE CSS */}
       <style>{`
 
-      
+      .input-group {
+  position: relative;
+}
+
+.input-group span {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
 
         body {
           margin: 0;
@@ -168,409 +223,387 @@ const captureRef = useRef<HTMLDivElement>(null);
           object-fit: cover;
         }
 
-        /* ================= CLOUD ================= */
-    /* ================= REAL CLOUD (PURE CSS) ================= */
 
-.cloud {
+
+        .cloud {
   position: absolute;
-  top: 10%;
+  top: 8%;
+  width: 200px;
+  z-index: 3;
+  text-align: center;
+}
 
-  width: 240px;
-  height: 80px;
+.cloud img {
+  width: 100%;
+  height: auto;
+}
 
-  background: #ffffff;
-  border-radius: 50px;
+.cloud.left { left: 4%; }
+.cloud.right { right: 4%; }
 
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 
+
+
+// .cloud p {
+//   position: absolute;
+//   inset: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   font-size: 13px;
+//   font-weight: 700;
+//   color: #171b22ff;
+//   padding: 0 14px;
+//   text-align: center;
+// }
+
+
+.cloud p {
+  position: absolute;
+  inset: 19%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  text-align: center;
-  z-index: 3;
-}
-
-/* cloud bumps */
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: #ffffff;
-  border-radius: 50%;
-}
-
-/* left big bump */
-.cloud::before {
-  width: 90px;
-  height: 90px;
-  top: -40px;
-  left: 20px;
-}
-
-/* right big bump */
-.cloud::after {
-  width: 110px;
-  height: 110px;
-  top: -55px;
-  right: 25px;
-}
-
-/* extra small bump */
-.cloud span {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  background: #ffffff;
-  border-radius: 50%;
-  top: -25px;
-  left: 90px;
-}
-
-/* positioning */
-.cloud.left {
-  left: 4%;
-}
-
-.cloud.right {
-  right: 4%;
-}
-
-/* text inside cloud */
-.cloud p {
-  position: relative;
-  z-index: 5;
-
-  max-width: 70%;
-  margin: 0;
-
+      
   font-size: 14px;
   font-weight: 700;
-  color: #0f172a;
+  color: #171b22ff;
+  text-align: center;
 
   line-height: 1.2;
-
   word-break: break-word;
   overflow-wrap: anywhere;
+  pointer-events: none;
 }
 
-        /* ================= HEART ================= */
-        .heart {
-          position: absolute;
-           overflow: visible;
-          left: 8%;
-          top: 55%;
-          width: 150px;
-          height: 140px;
-          background: #e11d48;
-          transform: rotate(-45deg);
-        }
 
-        .heart::before,
-        .heart::after {
-          content: "";
-          position: absolute;
-          width: 160px;
-          z-index: 1;  
-          height: 140px;
-          background: #e11d48;
-          border-radius: 50%;
-        }
 
-        .heart::before {
-          top: -70px;
-          left: 0;
-        }
 
-        .heart::after {
-          left: 70px;
-          top: 0;
-        }
 
-       .heart p {
+.heart {
   position: absolute;
-  inset: 0;
+  left: 8%;
+  top: 55%;
+  width: 130px;
+}
+
+.heart img {
+  width: 100%;
+}
+
+
+
+// .heart p {
+//   position: absolute;
+//   inset: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   font-size: 13px;
+//   font-weight: 800;
+//   color: white;
+//   text-align: center;
+//   padding: 0 10px;
+// }
+
+
+.heart p {
+  position: absolute;
+  inset: 18%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: white;
+        top:2%;
+  font-size: 13px;
   font-weight: 800;
-  font-size: 14px;              /* 👈 smaller text */
+  color: black
   text-align: center;
 
-  transform: rotate(45deg);
-  z-index: 2;                   /* 👈 ABOVE heart layers */
-
-  padding: 0 14px;
-  line-height: 1.1;
+  line-height: 1.2;
   pointer-events: none;
-
-  word-break: break-word;
-  overflow-wrap: anywhere;
 }
 
 
-        /* ================= CIRCLE ================= */
-        .circle {
-          position: absolute;
-          right: 8%;
-          top: 50%;
-          width: 160px;
-          height: 160px;
-          background: #0f172a;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-weight: 800;
-        }
 
-        /* ================= OVAL ================= */
-        .oval {
-          position: absolute;
-          bottom: 6%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 70%;
-          background: white;
-          padding: 24px 32px;
-          border-radius: 60px;
-          text-align: center;
-          font-weight: 700;
-          box-shadow: 0 20px 40px rgba(0,0,0,.25);
-        }
+/* ================= CIRCLE ================= */ 
+/* ================= CIRCLE (OVAL IMAGE + TEXT OVERLAY) ================= */
+.circle {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  width: 160px;
+  z-index: 4;
+  text-align: center;
+}
 
-        /* ================= CONTROLS ================= */
-        .controls {
-          margin-top: 30px;
-          display: grid;
-          gap: 14px;
-        }
+.circle img {
+  width: 100%;
+  height: auto;
+}
 
-        .controls input,
-        .controls textarea {
-          padding: 14px 18px;
-          border-radius: 14px;
-          border: 1px solid #e5e7eb;
-          font-size: 14px;
-        }
+.circle p {
+  position: absolute;
+  inset: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+      left:10%;
+      bottom:30%;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
 
-        .controls textarea {
-          resize: none;
-          height: 80px;
-        }
+  line-height: 2.5;
+  pointer-events: none;
+}
 
-       /* ================= MOBILE RESPONSIVE PATCH ================= */
+
+
+
+
+ /* ================= OVAL ================= */ 
+ .oval {
+  position: absolute; 
+  bottom: 6%; 
+  left: 50%;
+   transform: translateX(-50%);
+  width: 70%; background: white; 
+  padding: 24px 32px; 
+  border-radius: 60px; 
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+  
+  }
+        
+
+
+ /* ================= EDITOR PANEL ================= */
+.editor-panel {
+  margin: 40px auto 0;
+  max-width: 560px;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+
+.editor-panel h3 {
+  margin: 0 0 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+}
+
+/* ================= FIELD ================= */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+/* ================= INPUT WRAP ================= */
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input,
+.input-wrap textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1.5px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-wrap textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* focus */
+.input-wrap input:focus,
+.input-wrap textarea:focus {
+  border-color: #e11d48;
+  box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15);
+}
+
+/* counter */
+.input-wrap span {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* ================= DOWNLOAD BUTTON ================= */
+.download-btn {
+  margin-top: 26px;
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #e11d48, #fb7185);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(225,29,72,0.35);
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
 @media (max-width: 768px) {
 
   .page {
-    padding: 16px;
+    padding: 20px;
   }
 
-  /* Keep landscape but slightly shorter */
-  .photo-frame {
-    aspect-ratio: 3 / 2;
-    border-radius: 18px;
-  }
-
-  /* ---------- CLOUDS ---------- */
-  .cloud {
-    width: 170px;
-    height: 58px;
-    top: 8%;
-  }
-
-  .cloud.left {
-    left: 3%;
-  }
-
-  .cloud.right {
-    right: 3%;
-  }
-
-  .cloud::before {
-    width: 55px;
-    height: 55px;
-    top: -26px;
-    left: 18px;
-  }
-
-  .cloud::after {
-    width: 65px;
-    height: 65px;
-    top: -36px;
-    right: 20px;
-  }
-
-  .cloud span {
-    width: 45px;
-    height: 45px;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .cloud p {
-    font-size: 12px;
-    max-width: 75%;
-  }
-
-  /* ---------- HEART ---------- */
-  .heart {
-    width: 120px;
-    height: 110px;
-    top: 48%;
-    left: 6%;
-  }
-
-  .heart::before,
-  .heart::after {
-    width: 120px;
-    height: 110px;
-  }
-
-  .heart::before {
-    top: -55px;
-  }
-
-  .heart::after {
-    left: 55px;
-  }
-
-  .heart p {
-    font-size: 11px;
-    padding: 0 10px;
-  }
-
-  /* ---------- CIRCLE ---------- */
-  .circle {
-    width: 120px;
-    height: 120px;
-    top: 48%;
-    right: 6%;
-    font-size: 12px;
-  }
-
-  /* ---------- OVAL ---------- */
-  .oval {
-    width: 82%;
-    bottom: 5%;
-    padding: 14px 18px;
-    font-size: 12px;
-    border-radius: 999px;
-  }
-
-  /* ---------- CONTROLS ---------- */
-  .controls {
-    margin-top: 20px;
-  }
-
-  .controls input,
-  .controls textarea {
+  /* ---------- SEARCH ---------- */
+  .search-box input {
+    width: 200px;
     font-size: 13px;
   }
 
-  .download-btn {
-    margin-top: 16px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    font-size: 14px;
+  .search-box button {
+    padding: 10px 18px;
+    font-size: 13px;
   }
-}
 
-
-
-
-
-/* ================= EXTRA SMALL MOBILE (PHONES) ================= */
-
-/* ================= PHONE VIEW – FINAL FIX ================= */
-@media (max-width: 480px) {
+  /* ---------- PHOTO FRAME ---------- */
+  .photo-frame {
+    border-radius: 20px;
+  }
 
   /* ---------- CLOUDS ---------- */
   .cloud {
-    width: 28%;
-    min-width: 100px;
-    height: 40px;
-    top: 6%;
-  }
-
-  .cloud.left { left: 3%; }
-  .cloud.right { right: 3%; }
-
-  .cloud::before {
-    width: 30px;
-    height: 30px;
-    top: -14px;
-    left: 10px;
-  }
-
-  .cloud::after {
-    width: 36px;
-    height: 36px;
-    top: -20px;
-    right: 12px;
-  }
-
-  .cloud span {
-    width: 26px;
-    height: 26px;
-    top: -12px;
+    width: 100px;
+    top: 1%;
   }
 
   .cloud p {
     font-size: 6px;
-    front-family: "sans-serif";
-    max-width: 90%;
-    line-height: 1.1;
+    inset: 22%;
   }
 
   /* ---------- HEART ---------- */
   .heart {
-    width: 70px;
-    height: 64px;
-    top: 46%;
-    left: 5%;
+    width: 90px;
+    top: 52%;
+    left: 6%;
   }
-
-  .heart::before,
-  .heart::after {
-    width: 70px;
-    height: 64px;
-  }
-
-  .heart::before { top: -32px; }
-  .heart::after { left: 32px; }
 
   .heart p {
-    font-size: 6px;
-    padding: 0 6px;
+    font-size: 9px;
   }
 
-  /* ---------- CIRCLE ---------- */
+  /* ---------- CIRCLE (oval.png) ---------- */
   .circle {
-    width: 70px;
-    height: 70px;
-    top: 46%;
+    width: 90px;
     right: 5%;
-    font-size: 6px;
+    top: 52%;
   }
 
-  /* ---------- OVAL ---------- */
+  .circle p {
+    font-size: 9px;
+    inset: 20%;
+    line-height: 1.2;
+  }
+
+  /* ---------- BOTTOM OVAL ---------- */
   .oval {
-    width: 90%;
-    padding: 8px 12px;
-    font-size: 6px;
-    bottom: 3%;
+    width: 85%;
+    padding: 14px 18px;
+    bottom: 4%;
+  }
+
+  .oval p {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+
+  /* ---------- EDITOR PANEL ---------- */
+  .editor-panel {
+    padding: 20px;
+    margin-top: 28px;
+  }
+
+  .editor-panel h3 {
+    font-size: 16px;
+  }
+
+  .field label {
+    font-size: 12px;
+  }
+
+  .input-wrap input,
+  .input-wrap textarea {
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+
+  .input-wrap textarea {
+    height: 90px;
+  }
+
+  .input-wrap span {
+    font-size: 10px;
+  }
+
+  .download-btn {
+    font-size: 14px;
+    padding: 12px 0;
   }
 }
 
 
+@media (max-width: 480px) {
+
+  .cloud {
+    width: 110px;
+  }
+
+  .cloud p {
+    font-size: 9px;
+  }
+
+  .heart {
+    width: 70px;
+  }
+
+  .circle {
+    width: 70px;
+  }
+
+  .oval {
+    width: 92%;
+  }
+
+  .oval p {
+    font-size: 9px;
+  }
+}
 
       `}</style>
     </div>
   );
 }
- 
