@@ -1065,23 +1065,28 @@ export default function MyPhoto() {
     width: 95px;
   }
 
+  .cloud p{
+      font-size:7px;
+  }
+
   .circle.left {
     width: 65px;
   }
+    .circle p{
+        font-size:6px;
+    }
 
   .heart.right {
-    width: 70px;
+    width: 60px;
   }
+    
     .heart P{
-    inset: 1.1%;
+    inset: 1%;
+    font-size: 5.5px;
     bottom :20%;
     }
 
-  .cloud p,
-  .circle p,
-  .heart p {
-    font-size: 7px;
-  }
+  
 
   .oval p {
     font-size: 9px;
