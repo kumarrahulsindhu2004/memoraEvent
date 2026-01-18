@@ -941,7 +941,7 @@ export default function MyPhoto() {
 
   /* HEART */
   .heart.right {
-    width: 120px;
+    width: 70px;
     right: 3%;
     bottom: 28%;
   }
@@ -982,7 +982,7 @@ export default function MyPhoto() {
   }
 
   .heart.right {
-    width: 100px;
+    width: 80px;
   }
 
   .circle p,
@@ -1035,7 +1035,7 @@ export default function MyPhoto() {
   .heart.right {
     width: 50px;
     right: 3%;
-    bottom: 22%;
+    bottom: 30%;
   }
 
   .heart p {
