@@ -1057,11 +1057,12 @@ export default function MyPhoto() {
   }
 }
 
+
 /* EXTRA SMALL PHONES */
 @media (max-width: 380px) {
 
   .cloud {
-    width: 85px;
+    width: 95px;
   }
 
   .circle.left {
@@ -1069,8 +1070,12 @@ export default function MyPhoto() {
   }
 
   .heart.right {
-    width: 65px;
+    width: 70px;
   }
+    .heart P{
+    inset: 1.1%;
+    bottom :20%;
+    }
 
   .cloud p,
   .circle p,
