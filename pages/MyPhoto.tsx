@@ -1047,7 +1047,7 @@ export default function MyPhoto() {
   .oval {
     width: 94%;
     bottom: 1.5%;
-    padding: 10px 14px;
+    padding: 0px 5px;
   }
 
   .oval p {
