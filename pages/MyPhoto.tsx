@@ -834,6 +834,8 @@ const handleDownload = async () => {
           margin: 0;
         }
 
+
+
         /* CLOUDS */
         .cloud {
           position: absolute;
@@ -889,6 +891,8 @@ const handleDownload = async () => {
         .oval p {
           position: static;
           font-size: 15px;
+          transform: translateY(-5px);
+
           
         }
 
@@ -1014,7 +1018,7 @@ const handleDownload = async () => {
   }
 
   .heart.right {
-    width: 80px;
+    width: 50px;
   }
 
   .circle p,
@@ -1030,8 +1034,13 @@ const handleDownload = async () => {
   .oval p {
     font-size: 10px;
     line-height: 1.3;
+    transform: translateY(-5px);
   }
 }
+
+
+
+
 
 /* ================= MOBILE PREVIEW FIX (NO OVERLAP) ================= */
 @media (max-width: 600px) {
@@ -1086,8 +1095,19 @@ const handleDownload = async () => {
     font-size: 10px;
     line-height: 1.25;
     text-align: center;
+    transform: translateY(-5px);
+
   }
 }
+
+@media (max-width:430px){
+.oval p {
+    font-size: 9px;
+    transform: translateY(-5px);
+  }
+}
+
+
 
 
 /* EXTRA SMALL PHONES */
@@ -1119,7 +1139,7 @@ const handleDownload = async () => {
     .heart P{
     inset: 1%;
     font-size: 5.5px;
-    bottom :20%;
+    bottom :10%;
     }
 
   
@@ -1131,6 +1151,49 @@ const handleDownload = async () => {
 }
 
 
+
+@media (max-width: 375px) {
+  .heart p {
+    transform: translateY(-5px);    
+  }
+
+  .circle p{
+    right:14px;
+    top:10px;
+  }
+  .oval p{
+    inset:45%;
+    font-size:8px;
+    }
+}
+
+
+/* ================= LARGE PHONES (390px – 430px) ================= */
+@media (min-width: 390px) and (max-width: 430px) {
+
+  
+  
+ 
+  /* HEART – BIGGER */
+  .heart.right {
+    width: 60px;              /* 🔥 increase size */
+    bottom: 28%;
+  }
+
+  .heart p {
+    font-size: 6px;
+    white-space: nowrap;       /* 🔥 force single line */
+    inset: 22%;
+    transform: translateY(-7px);
+  }
+    .circle p{
+    transform: translateY(-5px);
+      right:15px;
+
+    }
+
+  
+}
 
 
         
