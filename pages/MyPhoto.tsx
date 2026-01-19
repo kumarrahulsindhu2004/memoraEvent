@@ -616,36 +616,64 @@ export default function MyPhoto() {
   );
 
   /* ================= DOWNLOAD ================= */
-  const handleDownload = async () => {
-    if (!captureRef.current) return;
+  // const handleDownload = async () => {
+  //   if (!captureRef.current) return;
 
-    // clone for export (prevents mobile layout issues)
-    const clone = captureRef.current.cloneNode(true);
-    clone.style.position = "fixed";
-    clone.style.left = "-9999px";
-    clone.style.top = "0";
-    clone.style.width = "1200px";
-    clone.style.height = "800px";
-    document.body.appendChild(clone);
+  //   // clone for export (prevents mobile layout issues)
+  //   const clone = captureRef.current.cloneNode(true);
+  //   clone.style.position = "fixed";
+  //   clone.style.left = "-9999px";
+  //   clone.style.top = "0";
+  //   clone.style.width = "1200px";
+  //   clone.style.height = "800px";
+  //   document.body.appendChild(clone);
 
-    if (document.fonts?.ready) await document.fonts.ready;
-    await new Promise(r => setTimeout(r, 300));
+  //   if (document.fonts?.ready) await document.fonts.ready;
+  //   await new Promise(r => setTimeout(r, 300));
 
-    const canvas = await html2canvas(clone, {
-      useCORS: true,
-      scale: 2,
-      backgroundColor: "#ffffff",
-      windowWidth: 1200,
-      windowHeight: 800,
-    });
+  //   const canvas = await html2canvas(clone, {
+  //     useCORS: true,
+  //     scale: 2,
+  //     backgroundColor: "#ffffff",
+  //     windowWidth: 1200,
+  //     windowHeight: 800,
+  //   });
 
-    document.body.removeChild(clone);
+  //   document.body.removeChild(clone);
 
-    const link = document.createElement("a");
-    link.download = `${imageName}.png`;
-    link.href = canvas.toDataURL("image/png", 1);
-    link.click();
-  };
+  //   const link = document.createElement("a");
+  //   link.download = `${imageName}.png`;
+  //   link.href = canvas.toDataURL("image/png", 1);
+  //   link.click();
+  // };
+
+
+const handleDownload = async () => {
+  if (!captureRef.current) return;
+
+  const element = captureRef.current;
+
+  // ✅ Get EXACT preview size
+  const rect = element.getBoundingClientRect();
+  const width = Math.round(rect.width);
+  const height = Math.round(rect.height);
+
+  const canvas = await html2canvas(element, {
+    scale: 3,                 // high quality
+    backgroundColor: "#ffffff",
+    useCORS: true,
+    width,
+    height,
+    windowWidth: document.documentElement.clientWidth,
+    windowHeight: document.documentElement.clientHeight,
+  });
+
+  const link = document.createElement("a");
+  link.download = `${imageName}.png`;
+  link.href = canvas.toDataURL("image/png", 1);
+  link.click();
+};
+
 
   return (
     <div className="page">
@@ -813,9 +841,7 @@ export default function MyPhoto() {
           width: 220px;
         }
 
-        .cloud p{
-          top:10%;
-        }
+      
         .cloud img { width: 100%; }
 
         .cloud.left { left: 3%; }
@@ -833,10 +859,7 @@ export default function MyPhoto() {
           width: 140px;
         }
 
-        .circle p{
-          top:5%;
-          left:5%;
-      }
+    
         .circle img { width: 100%; }
 
         /* HEART */
@@ -846,9 +869,7 @@ export default function MyPhoto() {
           bottom: 30%;
           width: 200px;
         }
-          .heart P{
-            top:-5%;
-          }
+          
 
         .heart img { width: 100%; }
 
@@ -1103,6 +1124,8 @@ export default function MyPhoto() {
     font-size: 9px;
   }
 }
+
+
 
 
         
