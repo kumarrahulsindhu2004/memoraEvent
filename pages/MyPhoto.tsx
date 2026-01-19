@@ -594,7 +594,7 @@
 
 
 
-
+// main ruuing code 
 
 'use client';
 
@@ -828,7 +828,7 @@ const handleDownload = async () => {
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding: 10px;
+          padding: 8px 10px 10px 10px;
           line-height: 1.35;
           word-break: break-word;
           margin: 0;
@@ -881,7 +881,7 @@ const handleDownload = async () => {
           transform: translateX(-50%);
           width: 85%;
           background: white;
-          padding: 18px 26px;
+          // padding: 0px;
           border-radius: 999px;
           box-shadow: 0 20px 40px rgba(0,0,0,.25);
         }
@@ -1099,6 +1099,8 @@ const handleDownload = async () => {
 
   .cloud p{
       font-size:7px;
+    transform: translateY(-2px);
+
   }
 
   .circle.left {
@@ -1106,6 +1108,8 @@ const handleDownload = async () => {
   }
     .circle p{
         font-size:6px;
+    transform: translateY(-5px);
+
     }
 
   .heart.right {
@@ -1122,6 +1126,7 @@ const handleDownload = async () => {
 
   .oval p {
     font-size: 9px;
+    transform: translateY(-5px);
   }
 }
 
@@ -1133,6 +1138,8 @@ const handleDownload = async () => {
     </div>
   );
 }
+
+
 
 
 
